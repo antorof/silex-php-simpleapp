@@ -7,5 +7,5 @@
     # RewriteBase /cc/web
     
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ web/index.php [QSA,L]
+    RewriteRule ^ index.php [QSA,L]
 </IfModule>
