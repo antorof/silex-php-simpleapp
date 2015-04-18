@@ -86,7 +86,18 @@ ul.errorlist {
 }
 
 @media (max-width: 425px) {
-  .col-xs-6 {
-    width:100%;
-  }
+    .col-xs-6 {
+        width:100%;
+    }
+    .col-xs-offset-3 {
+        margin-left: 0%;
+    }
+}
+.funciones h4 {
+    /*float:left;*/
+}
+.funciones .btn {
+    float:right;
+    margin-top:7px;
+    margin-bottom: 7px;
 }

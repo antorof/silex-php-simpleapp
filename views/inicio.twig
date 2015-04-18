@@ -25,6 +25,31 @@
         <div class="form-group">
           {{ contenido|raw }}
         </div>
+
+        <div class='col-xs-6 col-sm-4 funciones'>
+            <div class='panel panel-default'>
+                <div class='panel-body'>
+                    <h4>Crea un contacto</h4>
+                    <a class="btn btn-primary btn-sm" href="crear-contacto"><span class="glyphicon glyphicon-plus"></span></a>
+                </div>
+            </div>
+        </div>
+        <div class='col-xs-6 col-sm-4 funciones'>
+            <div class='panel panel-default'>
+                <div class='panel-body'>
+                    <h4>Busca un contacto</h4>
+                    <a class="btn btn-info btn-sm" href="buscar-contactos"><span class="glyphicon glyphicon-search"></span></a>
+                </div>
+            </div>
+        </div>
+        <div class='col-xs-6 col-sm-4 col-xs-offset-3 col-sm-offset-0 funciones'>
+            <div class='panel panel-default'>
+                <div class='panel-body'>
+                    <h4>Ve todos los contactos</h4>
+                    <a class="btn btn-default btn-sm" href="ver-contactos"><span class="glyphicon glyphicon-list"></span></a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -56,7 +81,11 @@
         function mostrarModal(title, texto, tipo, callback) {
             $('#miModal .modal-title').html(title);
             $('#miModal .modal-body p').html(texto);
-            $('#miModal .modal-footer button').addClass(tipo);
+            $('#miModal .modal-footer button').addClass('btn-'+tipo);
+            $('#miModal').modal();
+
+            if(callback!=undefined)
+                callback();
 //            $('#miModal .modal-body p').addClass('text-danger');
         }
     </script>
@@ -73,7 +102,7 @@
             <p></p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+            <button type="button" class="btn btn-default_" data-dismiss="modal">Aceptar</button>
           </div>
         </div>
       </div>
