@@ -13,9 +13,10 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('inicio.twig', array(
+        'page_title' => "Inicio :: Gestor de contactos",
         'titulo_cabecera' => "",
-        'titulo_principal' => "cabecera",
-        'subtitulo_principal' => "cabecera",
+        'titulo_principal' => "Gestor de contactos",
+        'subtitulo_principal' => "Administra tus contactos de forma sencilla.",
         'titulo_contenido' => "cabecera",
         'contenido' => "contenido",
         'keyword' => "",

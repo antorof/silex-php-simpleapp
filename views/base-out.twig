@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    {% if page_title is defined %}
+    <title>{{ page_title }}</title>
+    {% endif %}
     <link rel="stylesheet" type="text/css" href="{{ app.request.basepath }}/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="{{ app.request.basepath }}/css/estilos.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
