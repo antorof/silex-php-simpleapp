@@ -1,11 +1,8 @@
 <?php
-/*
- * @author Juan Marfil Bustos
- * @email jmarfilb (at) gmail (dot) com
+/**
+ * @author Juan Marfil
+ * @author Antonio Toro
  */
-
- 
-
 
  /**
   * Contiene los datos de acceso para la conexion con la base de datos mysql
@@ -25,22 +22,21 @@
  	 * @name $user
  	 * @access public
  	 */
-	public static $user = 'u331967724_cys';	
+	public static $user = 'wa-user';
 
 	/**
- 	 * @var string La contrase�a para conectar a la base de datos
+ 	 * @var string La contraseña para conectar a la base de datos
  	 * @name $password
  	 * @access public
- 	 */	
-	//public static $password = 'hostingpruebas1';
-	public static $password = 'dS5iUjRd_yp*tr5';
+ 	 */
+	public static $password = 'wausrpw';
 
 	/**
  	 * @var string El nombre de la base de datos a conectar
  	 * @name $dataBase
  	 * @access public
  	 */
-	public static $dataBase = 'u331967724_cys';
+	public static $dataBase = 'webapp';
 
  }
  

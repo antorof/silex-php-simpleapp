@@ -1,8 +1,7 @@
 <?php
- /*
- * @author Juan Marfil Bustos
- * @email jmarfilb (at) gmail (dot) com
- *
+/**
+ * @author Juan Marfil
+ * @author Antonio Toro
  */
 
  require_once 'class.DBConnection.php';
@@ -125,14 +124,14 @@
 	public static function flashConnectDataBase($host, $user, $pass, $db, $query){
 		$link = new mysqli($host, $user, $pass);
   		if ($link->connect_error) {
-  			throw new ConnectException("Imposible realizar la conexion: " . $this->linkDataBase->connect_error);
+  			throw new ConnectException("Imposible realizar la conexion: " . $link->connect_error);
   		}
   		
   		$link->select_db($db);		
   		$resultado = $link->query( $query);
   		  		
   		if(!$resultado){
-  			throw new QueryException("Consulta no v�lida: --$consulta-- " . $this->linkDataBase->connect_error);
+  			throw new QueryException("Consulta no v�lida: --$query-- " . $link->connect_error);
   		}
 
   		return $resultado;
@@ -226,6 +225,24 @@
 		}
 		return false;
 	}
+
+     /**
+      * @param string $id ID de la fila
+      * @param string $table Tabla de la que se eliminara la fila
+      * @param string $id_column_name Nombre de la columna que se corresponde con el id
+      * @return resource Resultado de la operacion
+      */
+    public function deleteRow($id, $table, $id_column_name="id") {
+        $query = "DELETE FROM $table WHERE $id_column_name='$id'";
+
+        return $this->execute($query);
+    }
+
+    public function deleteRows($table, $condition=false) {
+        $query = "DELETE FROM $table WHERE $condition";
+
+        return $this->execute($query);
+    }
 
  }
 

@@ -1,7 +1,6 @@
 <?php
 /*
  * @author Juan Marfil Bustos
- * @email jmarfilb (at) gmail (dot) com
  * */
 
  /**
