@@ -46,13 +46,22 @@ $app->get('/ver-contactos', function () use ($app) {
         'titulo_principal' => "Ver contactos",
         'subtitulo_principal' => "Aquí están todos tus contactos.",
         'titulo_contenido' => "Contactos:",
-        'contenido' => json_encode($contactos),
+        'contenido' => '',
         'keyword' => "",
         'seccion' => "ver-contactos",
         'contactos' => $contactos
 //        'contactos' => json_encode($contactos)
     ));
 });
+
+// Funciones CRUD
+
+$app->match('/borrar-contacto/{id}', function ($id) use ($app) {
+    global $gc;
+    $result = $gc->eliminarContacto($id);
+
+    return $app->json(array("resultado"=>$result));
+})->method('GET|PUT|POST|DELETE'); // Se podría omitir esta linea
 
 $app->get('/hola/{name}', function ($name) use ($app) {
     return $app['twig']->render('hola.twig', array(

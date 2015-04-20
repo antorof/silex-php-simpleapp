@@ -27,10 +27,10 @@
         </div>
         {#<p>{{ contactos }}</p>#}
         {% for c in contactos %}
-            <div class='col-xs-6 col-sm-4 col-md-3'><div class='panel panel-default'>
-                <input type="hidden" id="{{ c.id }}"/>
+            <div id="{{ c.id }}" class='col-xs-6 col-sm-4 col-md-3'><div class='panel panel-default'>
+                {#<input type="hidden" id="{{ c.id }}"/>#}
                 <div class="panel-heading">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <button type="button" onclick="borrarContacto({{ c.id }})" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4>{{ c.nombre }}</h4>
                 </div>
                 <div class='panel-body'>
@@ -76,6 +76,19 @@
             if(callback!=undefined)
                 callback();
 //            $('#miModal .modal-body p').addClass('text-danger');
+        }
+
+        function borrarContacto(id) {
+            $.post( "{{ app.request.basepath }}/borrar-contacto/"+id, function(data) {
+                console.log( data );
+                if(data.resultado == true)
+                    $("#"+id).remove();
+            })
+                .fail(function(data) {
+                    console.log("fail");
+                })
+                .always(function() {
+                });
         }
     </script>
     
