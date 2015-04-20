@@ -50,4 +50,10 @@ class GestorContactos {
     public function eliminarCamposAdicionales($contacto) {
         return $this->db->deleteRows("campos_adicionales","contacto='$contacto'");
     }
+
+    public function listarContactos() {
+        $query = "SELECT * FROM contactos";
+
+        return $this->db->getArrayAsocc($this->db->execute($query));
+    }
 } 
