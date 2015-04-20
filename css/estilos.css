@@ -101,3 +101,11 @@ ul.errorlist {
     margin-top:7px;
     margin-bottom: 7px;
 }
+
+.crear-contacto.jumbotron {
+    background-color: #E6EE9C;
+}
+
+.ver-contactos.jumbotron {
+    background-color: #eecfe2;
+}

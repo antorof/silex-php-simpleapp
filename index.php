@@ -20,6 +20,37 @@ $app->get('/', function () use ($app) {
         'titulo_contenido' => "cabecera",
         'contenido' => "contenido",
         'keyword' => "",
+        'seccion' => "",
+    ));
+});
+
+$app->get('/crear-contacto', function () use ($app) {
+    return $app['twig']->render('crear-contacto.twig', array(
+        'page_title' => "Crear contacto :: Gestor de contactos",
+        'titulo_cabecera' => "",
+        'titulo_principal' => "Crear contacto",
+        'subtitulo_principal' => "Rellena los campos para añadir un nuevo contacto.",
+        'titulo_contenido' => "Campos opcionales",
+        'contenido' => "",
+        'keyword' => "",
+        'seccion' => "crear-contacto",
+    ));
+});
+
+$app->get('/ver-contactos', function () use ($app) {
+    global $gc;
+    $contactos = $gc->listarContactos();
+    return $app['twig']->render('ver-contactos.twig', array(
+        'page_title' => "Ver contactos :: Gestor de contactos",
+        'titulo_cabecera' => "",
+        'titulo_principal' => "Ver contactos",
+        'subtitulo_principal' => "Aquí están todos tus contactos.",
+        'titulo_contenido' => "Contactos:",
+        'contenido' => json_encode($contactos),
+        'keyword' => "",
+        'seccion' => "ver-contactos",
+        'contactos' => $contactos
+//        'contactos' => json_encode($contactos)
     ));
 });
 

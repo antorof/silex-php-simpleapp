@@ -6,52 +6,41 @@
             {#<span class="glyphicon glyphicon-refresh faa-spin"></span>&nbsp;&nbsp;Actualizar base de datos#}
         {#</button>#}
     </div>
-        
-    <div class="container-fluid jumbotron" style="padding: 35px">
+
+    <form class="" action="." method="post">
+    <div class="container-fluid jumbotron {{ seccion }}" style="padding: 35px">
         <h1>{{ titulo_principal|raw }}</h1>
         <p>{{ subtitulo_principal|raw }}</p>
-        
-        <form class="form-signins" action="." method="post">
-            <div class="input-group">
-                <input class="form-control" type="text" id="keyword" name="keyword" placeholder="Busca un contacto" value="{{ keyword }}">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
+
+            <div class="form-group">
+                {#<input class="form-control" type="text" id="nombre" name="nombre" placeholder="Nombre del contacto" value="{{ keyword }}">#}
+                {#<span class="input-group-btn">#}
+                    {#<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>#}
+                {#</span>#}
             </div>
-        </form>
+
     </div>
     <div class="container">
         <h3><em>{{ titulo_contenido|raw }}</em></h3>
         <div class="form-group">
           {{ contenido|raw }}
         </div>
-
-        <div class='col-xs-6 col-sm-4 funciones'>
-            <div class='panel panel-default'>
-                <div class='panel-body'>
-                    <h4>Crea un contacto</h4>
-                    <a class="btn btn-success btn-sm" href="crear-contacto"><span class="glyphicon glyphicon-plus"></span></a>
+        {#<p>{{ contactos }}</p>#}
+        {% for c in contactos %}
+            <div class='col-xs-6 col-sm-4 col-md-3'><div class='panel panel-default'>
+                <input type="hidden" id="{{ c.id }}"/>
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4>{{ c.nombre }}</h4>
                 </div>
-            </div>
-        </div>
-        <div class='col-xs-6 col-sm-4 funciones'>
-            <div class='panel panel-default'>
                 <div class='panel-body'>
-                    <h4>Busca un contacto</h4>
-                    <a class="btn btn-primary btn-sm" href="buscar-contactos"><span class="glyphicon glyphicon-search"></span></a>
+                    <p> <span class="text-muted">Email: </span>{{ c.email }}</p>
+                    <p> <span class="text-muted">Teléfono: </span>{{ c.telefono }}</p>
                 </div>
-            </div>
-        </div>
-        <div class='col-xs-6 col-sm-4 col-xs-offset-3 col-sm-offset-0 funciones'>
-            <div class='panel panel-default'>
-                <div class='panel-body'>
-                    <h4>Ve todos los contactos</h4>
-                    <a class="btn btn-info btn-sm" href="ver-contactos"><span class="glyphicon glyphicon-list"></span></a>
-                </div>
-            </div>
-        </div>
+            </div></div>
+        {% endfor %}
     </div>
-
+    </form>
     <script>
     $(function(){
         $( "#btnActualizar" ).click(function() {
