@@ -17,8 +17,8 @@ $app->get('/', function () use ($app) {
         'titulo_cabecera' => "",
         'titulo_principal' => "Gestor de contactos",
         'subtitulo_principal' => "Administra tus contactos de forma sencilla.",
-        'titulo_contenido' => "cabecera",
-        'contenido' => "contenido",
+        'titulo_contenido' => "",
+        'contenido' => "",
         'keyword' => "",
         'seccion' => "",
     ));
