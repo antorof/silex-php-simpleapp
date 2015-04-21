@@ -109,3 +109,7 @@ ul.errorlist {
 .ver-contactos.jumbotron {
     background-color: #eecfe2;
 }
+
+.float-right {
+    float: right;
+}

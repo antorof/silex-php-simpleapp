@@ -61,7 +61,18 @@ $app->match('/borrar-contacto/{id}', function ($id) use ($app) {
     $result = $gc->eliminarContacto($id);
 
     return $app->json(array("resultado"=>$result));
-})->method('GET|PUT|POST|DELETE'); // Se podría omitir esta linea
+})->method('POST|DELETE');
+
+$app->post('/crear-contacto', function (Request $request) use ($app) {
+    global $gc;
+    $nombre = $request->get("nombre");
+    $email = $request->get("email");
+    $telefono = $request->get("telefono");
+
+    $result = $gc->aniadirContacto($nombre,$email,$telefono);
+
+    return $app->json(array("resultado"=>$result));
+});
 
 $app->get('/hola/{name}', function ($name) use ($app) {
     return $app['twig']->render('hola.twig', array(
