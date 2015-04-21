@@ -30,7 +30,7 @@
             <div id="{{ c.id }}" class='col-xs-6 col-sm-4 col-md-3'><div class='panel panel-default'>
                 {#<input type="hidden" id="{{ c.id }}"/>#}
                 <div class="panel-heading">
-                    <button type="button" onclick="borrarContacto({{ c.id }})" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <button type="button" onclick="mostrarModalBorrar({{ c.id }})" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4>{{ c.nombre }}</h4>
                 </div>
                 <div class='panel-body'>
@@ -42,40 +42,49 @@
     </div>
     </form>
     <script>
-    $(function(){
-        $( "#btnActualizar" ).click(function() {
-            $( "#btnActualizar span" ).addClass('animated');
-            $( "#btnActualizar" ).addClass('disabled');
-            $('#miModal .modal-body p').removeClass('text-danger');
-            
-            $.post( "", function(data) {
-              console.log( data );
-              
-              var texto = "La base de datos contiene ahora un total de <strong>"+data.numItems+"</strong> noticias. <br/>"
-              texto += "Se han incluido <strong>"+data.nuevosItems+"</strong> nuevas noticias.";
-              $('#miModal .modal-body p').html(texto);
-            })
-              .fail(function() {
-                $('#miModal .modal-body p').html("Ha habido un problema durante la actualizaci&oacute;n.");
-                $('#miModal .modal-body p').addClass('text-danger');
-              })
-              .always(function() {
-                $('#miModal').modal();
-                $( "#btnActualizar span" ).removeClass('animated');
-                $( "#btnActualizar" ).removeClass('disabled');
-              });
+        $(function(){
+            $( "#btnActualizar" ).click(function() {
+                $( "#btnActualizar span" ).addClass('animated');
+                $( "#btnActualizar" ).addClass('disabled');
+                $('#miModal .modal-body p').removeClass('text-danger');
+
+                $.post( "", function(data) {
+                  console.log( data );
+
+                  var texto = "La base de datos contiene ahora un total de <strong>"+data.numItems+"</strong> noticias. <br/>"
+                  texto += "Se han incluido <strong>"+data.nuevosItems+"</strong> nuevas noticias.";
+                  $('#miModal .modal-body p').html(texto);
+                })
+                  .fail(function() {
+                    $('#miModal .modal-body p').html("Ha habido un problema durante la actualizaci&oacute;n.");
+                    $('#miModal .modal-body p').addClass('text-danger');
+                  })
+                  .always(function() {
+                    $('#miModal').modal();
+                    $( "#btnActualizar span" ).removeClass('animated');
+                    $( "#btnActualizar" ).removeClass('disabled');
+                  });
+            });
         });
-    });
 
-        function mostrarModal(title, texto, tipo, callback) {
-            $('#miModal .modal-title').html(title);
-            $('#miModal .modal-body p').html(texto);
-            $('#miModal .modal-footer button').addClass('btn-'+tipo);
-            $('#miModal').modal();
-
-            if(callback!=undefined)
-                callback();
-//            $('#miModal .modal-body p').addClass('text-danger');
+        function mostrarModalBorrar(id) {
+            bootbox.dialog({
+                message: "¿Estás seguro de que quieres borrar ese contacto?",
+                title: "Borrar contacto",
+                buttons: {
+                    main: {
+                        label: "Cancelar",
+                        className: "btn-default",
+                    },
+                    danger: {
+                        label: "Borrar",
+                        className: "btn-danger",
+                        callback: function() {
+                            borrarContacto(id);
+                        }
+                    }
+                }
+            });
         }
 
         function borrarContacto(id) {
