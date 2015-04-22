@@ -107,12 +107,6 @@ $app->post('/crear-contacto', function (Request $request) use ($app) {
     return $app->json(array("resultado"=>$result));
 });
 
-$app->get('/hola/{name}', function ($name) use ($app) {
-    return $app['twig']->render('hola.twig', array(
-        'name' => $name,
-    ));
-});
-
 $app->get('/buscar/{keyword}', function ($keyword) use ($app) {
     global $gc;
     $result = $gc->buscar($keyword);
@@ -120,21 +114,6 @@ $app->get('/buscar/{keyword}', function ($keyword) use ($app) {
     return $app->json($result);
 });
 
-$app->get('/helllo', function () use ($app) {
-    return $app['twig']->render('crawler.twig', array(
-        'nombre' => "T&iacute;tulo",
-        'keyword' => "keyword",
-        'cabecera' => "cabecera",
-        'contenido' => "contenido",
-    ));
-});
-$app->get('/hola', function () {
-    return 'caracola!';
-});
-//$app->get('/hola', function (Silex\Application $app, Request $request) {
-//
-//    return '¡Hola! cahi-> '.$request->getUriForPath("/hello");
-//});
 //$app->error(function (\Exception $e, $code) use ($app) {
 //
 //    // commented for testing purposes
