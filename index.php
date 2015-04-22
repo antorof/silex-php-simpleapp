@@ -113,6 +113,13 @@ $app->get('/hola/{name}', function ($name) use ($app) {
     ));
 });
 
+$app->get('/buscar/{keyword}', function ($keyword) use ($app) {
+    global $gc;
+    $result = $gc->buscar($keyword);
+
+    return $app->json($result);
+});
+
 $app->get('/helllo', function () use ($app) {
     return $app['twig']->render('crawler.twig', array(
         'nombre' => "T&iacute;tulo",

@@ -4,13 +4,13 @@
         <h2 class="">{{ titulo_cabecera }}</h2>
     </div>
 
-    <form class="" action="." method="post">
+    <form class="" action="." method="post" onsubmit="return buscar()">
     <div class="container-fluid jumbotron {{ seccion }}" style="padding: 35px">
         <h1>{{ titulo_principal|raw }}</h1>
         <p>{{ subtitulo_principal|raw }}</p>
 
         <div class="input-group form-group">
-            <input class="form-control" type="text" id="keyword" name="keyword" placeholder="Busca un contacto" value="{{ keyword }}">
+            <input required class="form-control" type="text" id="keyword" name="keyword" placeholder="Busca un contacto" value="{{ keyword }}">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
             </span>
@@ -23,6 +23,7 @@
           {{ contenido|raw }}
         </div>
         {#<p>{{ contactos }}</p>#}
+        <div id="divContactos">
         {% if contactos is not defined %}
             <p>Introduce alguna cadena para comenzar la búsqueda.</p>
         {% elseif contactos is empty %}
@@ -42,6 +43,7 @@
                     </div></div>
             {% endfor %}
         {% endif %}
+        </div>
     </div>
     </form>
 
@@ -78,6 +80,43 @@
                 })
                 .always(function() {
                 });
+        }
+
+
+        function buscar() {
+            var divContactos = $("#divContactos");
+            var keyword = $('#keyword').val();
+            $.get( "{{ app.request.basepath }}/buscar/"+keyword, function(data) {
+                divContactos.html("");
+                if(data.length > 0) {
+                    data.forEach(function(elem, i, arr){
+                        var child = "";
+                        child+="<div id="+elem.id+" class='col-xs-6 col-sm-4 col-md-3'><div class='panel panel-default'>"
+                        child+="  <div class='panel-heading'>";
+                        child+="    <button type='button' onclick='mostrarModalBorrar("+elem.id+")' class='close' data-dismiss='modal' aria-hidden='true'>×</button>";
+                        child+="    <h4>"+elem.nombre+"</h4>";
+                        child+="  </div><div class='panel-body'>";
+                        child+="    <p> <span class='text-muted'>Email: </span>"+elem.email+"</p>";
+                        child+="    <p> <span class='text-muted'>Tel&eacute;fono: </span>"+elem.telefono+"</p>";
+                        child+="  </div>";
+                        child+="</div></div>";
+
+                        divContactos.append(child);
+                    });
+                } else {
+
+                }
+                var urlarr = window.location.pathname.split("/");
+                urlarr.splice(urlarr.length-1,1);
+                window.history.pushState("Look for "+keyword, "{{ page_title }}", urlarr.join("/")+"/"+keyword);
+            })
+            .fail(function(data) {
+                console.log("fail");
+            })
+            .always(function() {
+            });
+
+            return false;
         }
         
     </script>
