@@ -37,6 +37,22 @@ $app->get('/crear-contacto', function () use ($app) {
     ));
 });
 
+$app->get('/buscar-contactos', function () use ($app) {
+    global $gc;
+    $contactos = $gc->listarContactos();
+    return $app['twig']->render('buscar-contactos.twig', array(
+        'page_title' => "Buscar contactos :: Gestor de contactos",
+        'titulo_cabecera' => "",
+        'titulo_principal' => "Buscar contactos",
+        'subtitulo_principal' => "Introduce algún dato que pueda estar relacionado con un contacto.",
+        'titulo_contenido' => "",
+        'contenido' => '',
+        'keyword' => "",
+        'seccion' => "buscar-contactos",
+        'contactos' => $contactos
+    ));
+});
+
 $app->get('/ver-contactos', function () use ($app) {
     global $gc;
     $contactos = $gc->listarContactos();

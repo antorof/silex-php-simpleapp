@@ -1,0 +1,82 @@
+{% extends "base-out.twig" %}
+{% block content %}
+    <div class="container heading">
+        <h2 class="">{{ titulo_cabecera }}</h2>
+    </div>
+
+    <form class="" action="." method="post">
+    <div class="container-fluid jumbotron {{ seccion }}" style="padding: 35px">
+        <h1>{{ titulo_principal|raw }}</h1>
+        <p>{{ subtitulo_principal|raw }}</p>
+
+        <div class="input-group form-group">
+            <input class="form-control" type="text" id="keyword" name="keyword" placeholder="Busca un contacto" value="{{ keyword }}">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            </span>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3><em>{{ titulo_contenido|raw }}</em></h3>
+        <div class="form-group">
+          {{ contenido|raw }}
+        </div>
+        {#<p>{{ contactos }}</p>#}
+        {% if contactos is not defined or contactos is empty %}
+            <p>No hay que coincidan con ese par&aacute;metro</p>
+        {% else %}
+            {% for c in contactos %}
+                <div id="{{ c.id }}" class='col-xs-6 col-sm-4 col-md-3'><div class='panel panel-default'>
+                        {#<input type="hidden" id="{{ c.id }}"/>#}
+                        <div class="panel-heading">
+                            <button type="button" onclick="mostrarModalBorrar({{ c.id }})" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4>{{ c.nombre }}</h4>
+                        </div>
+                        <div class='panel-body'>
+                            <p> <span class="text-muted">Email: </span>{{ c.email }}</p>
+                            <p> <span class="text-muted">Teléfono: </span>{{ c.telefono }}</p>
+                        </div>
+                    </div></div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    </form>
+    <script>
+
+        function mostrarModalBorrar(id) {
+            bootbox.dialog({
+                message: "¿Estás seguro de que quieres borrar ese contacto?",
+                title: "Borrar contacto",
+                buttons: {
+                    main: {
+                        label: "Cancelar",
+                        className: "btn-default",
+                    },
+                    danger: {
+                        label: "Borrar",
+                        className: "btn-danger",
+                        callback: function() {
+                            borrarContacto(id);
+                        }
+                    }
+                }
+            });
+        }
+
+        function borrarContacto(id) {
+            $.post( "{{ app.request.basepath }}/borrar-contacto/"+id, function(data) {
+                console.log( data );
+                if(data.resultado == true)
+                    $("#"+id).remove();
+            })
+                .fail(function(data) {
+                    console.log("fail");
+                })
+                .always(function() {
+                });
+        }
+        
+    </script>
+
+{% endblock %}

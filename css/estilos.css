@@ -110,6 +110,10 @@ ul.errorlist {
     background-color: #eecfe2;
 }
 
+.buscar-contactos.jumbotron {
+    background-color: #d2e9ee;
+}
+
 .float-right {
     float: right;
 }
