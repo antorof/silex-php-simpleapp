@@ -23,8 +23,10 @@
           {{ contenido|raw }}
         </div>
         {#<p>{{ contactos }}</p>#}
-        {% if contactos is not defined or contactos is empty %}
-            <p>No hay que coincidan con ese par&aacute;metro</p>
+        {% if contactos is not defined %}
+            <p>Introduce alguna cadena para comenzar la búsqueda.</p>
+        {% elseif contactos is empty %}
+            <p>No hay contactos que coincidan con ese par&aacute;metro</p>
         {% else %}
             {% for c in contactos %}
                 <div id="{{ c.id }}" class='col-xs-6 col-sm-4 col-md-3'><div class='panel panel-default'>
@@ -42,6 +44,7 @@
         {% endif %}
     </div>
     </form>
+
     <script>
 
         function mostrarModalBorrar(id) {

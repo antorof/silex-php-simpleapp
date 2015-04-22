@@ -77,4 +77,15 @@ class GestorContactos {
 
         return $this->db->getArrayAsocc($this->db->execute($query));
     }
+
+    public function buscar($keyword) {
+        $keyword = $this->db->escapeChar($keyword);
+
+        $query = "SELECT * FROM contactos
+                  WHERE nombre   COLLATE UTF8_GENERAL_CI LIKE '%$keyword%' OR
+                        email    COLLATE UTF8_GENERAL_CI LIKE '%$keyword%' OR
+                        telefono COLLATE UTF8_GENERAL_CI LIKE '%$keyword%'";
+
+        return $this->db->getArrayAsocc($this->db->execute($query));
+    }
 } 
