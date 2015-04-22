@@ -8,14 +8,14 @@
         <h1>{{ titulo_principal|raw }}</h1>
         <p>{{ subtitulo_principal|raw }}</p>
         
-        <form class="form-signins" action="." method="post">
+        {#<form class="form-signins" action="." method="post">#}
             <div class="input-group form-group">
                 <input class="form-control" type="text" id="keyword" name="keyword" placeholder="Busca un contacto" value="{{ keyword }}">
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                    <button class="btn btn-primary" onclick="lanzarBusqueda()"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
             </div>
-        </form>
+        {#</form>#}
     </div>
     <div class="container">
         <h3><em>{{ titulo_contenido|raw }}</em></h3>
@@ -50,6 +50,9 @@
     </div>
 
     <script>
+        function lanzarBusqueda() {
+            location.href = location.href+"buscar-contactos/"+$('#keyword').val();
+        }
     </script>
 
 {% endblock %}
