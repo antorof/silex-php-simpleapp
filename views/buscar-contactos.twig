@@ -107,8 +107,8 @@
 
                 }
                 var urlarr = window.location.pathname.split("/");
-                urlarr.splice(urlarr.length-1,1);
-                window.history.pushState("Look for "+keyword, "{{ page_title }}", urlarr.join("/")+"/"+keyword);
+                urlarr.shift(); // Quito el primer elemento, el ""
+                window.history.pushState("Look for "+keyword, "{{ page_title }}", "/"+urlarr.shift()+"/buscar-contactos/"+keyword);
             })
             .fail(function(data) {
                 console.log("fail");
