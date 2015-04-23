@@ -108,7 +108,8 @@
                 }
                 var urlarr = window.location.pathname.split("/");
                 urlarr.shift(); // Quito el primer elemento, el ""
-                window.history.pushState("Look for "+keyword, "{{ page_title }}", "/"+urlarr.shift()+"/buscar-contactos/"+keyword);
+                var state = {keyword:keyword,contactos:$("#divContactos").html()};
+                window.history.pushState(state, "{{ page_title }}", "/"+urlarr.shift()+"/buscar-contactos/"+keyword);
             })
             .fail(function(data) {
                 console.log("fail");
@@ -118,7 +119,13 @@
 
             return false;
         }
-        
+
+        window.addEventListener('popstate', function(event) {
+            if (event.state) {
+                $('#keyword').val(event.state.keyword);
+                $("#divContactos").html(event.state.contactos);
+            }
+        }, false);
     </script>
 
 {% endblock %}
