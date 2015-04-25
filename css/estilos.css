@@ -76,7 +76,7 @@ ul.errorlist {
 .heading h2 {
   float:left;
 }
-.heading .btn {
+.heading .btn.action{
   float:right;
   margin-top:24px;
   margin-bottom: 10px;
@@ -117,3 +117,13 @@ ul.errorlist {
 .float-right {
     float: right;
 }
+
+.nav-link {
+    color: #000000;
+    transition: all 0.2s;
+}
+.nav-link:hover {
+    color: #3d3d3d;
+    text-decoration: none;
+    transform: translate(-2px);
+ }
